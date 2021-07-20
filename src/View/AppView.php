@@ -50,7 +50,9 @@ class AppView extends View
                 'inputContainer' => '<div class="input {{type}}{{required}} mb-3">{{content}}</div>',
                 // Container element used by control() when a field has an error.
                 'inputContainerError' => '<div class="input {{type}}{{required}} error mb-3">{{content}}{{error}}</div>',
-
+                'radioContainer' => '<div{{containerAttrs}} class="{{containerClass}}form-group {{type}}{{required}}" role="group" aria-labelledby="{{groupId}}"><ul class="list-group">{{content}}</ul></div>',
+                'radioLabel' => '<label{{attrs}}>{{text}}{{tooltip}}</label>',
+                'radioWrapper' => '<li class="list-group-item"><div class="form-check">{{hidden}}{{label}}</div></li>',
             ],
         ]);
     }
