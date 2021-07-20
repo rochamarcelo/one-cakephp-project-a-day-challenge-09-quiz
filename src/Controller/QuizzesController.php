@@ -48,4 +48,13 @@ class QuizzesController extends AppController
         }
         $this->set(compact('qtyQuestions'));
     }
+
+    /**
+     * @param QuizzesCollection $collection
+     */
+    public function index(QuizzesCollection $collection)
+    {
+        $quizzes = $collection->getAll();
+        $this->set(compact('quizzes'));
+    }
 }
