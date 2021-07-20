@@ -12,6 +12,28 @@ use MongoDB\Model\BSONDocument;
 class QuizzesCollection
 {
     /**
+     * @param array $questions
+     * @param array $answers
+     */
+    public function getResults($questions, array $answers)
+    {
+        $total = count($questions);
+        $correctCount = 0;
+        foreach ($answers as $id => $answer) {
+            $answer = (int)$answer;
+            $isCorrect = $questions[$id]['options'][$answer]['is_correct'] ?? false;
+            if ($isCorrect === true) {
+                $correctCount++;
+            }
+        }
+
+        return [
+            'correctCount' => $correctCount,
+            'total' => $total,
+        ];
+    }
+
+    /**
      * @return \MongoDB\Driver\Cursor
      */
     public function getAll()
