@@ -21,7 +21,7 @@ $this->Html->script(['quizzes.js'], ['block' => true]);
         color:#45586b;
     }
 </style>
-<h1><?= h($quiz->name)?></h1>
+<h1 style="margin-bottom: 35px"><?= h($quiz->name)?></h1>
 <?= $this->Form->create(null, ['id' => 'frmQuiz'])?>
 <?php
 $show = true;
