@@ -34,6 +34,40 @@ class QuizzesCollection
     }
 
     /**
+     * Create a new quiz
+     *
+     * @param array $data
+     */
+    public function createOne(array $data)
+    {
+        foreach ($data['questions'] as $key => $question) {
+            $correctOption = (int)$question['correct_option'];
+            unset($question['correct_option']);
+            foreach ($question['options'] as $optionKey => $option) {
+                $question['options'][$optionKey] = [
+                    'text' => $option['text'],
+                    'is_correct' => $optionKey == $correctOption,
+                ];
+            }
+            $data['questions'][$key] = [
+                'title' => $question['title'],
+                'options' => $question['options'],
+            ];
+        }
+        $data = [
+            'name' => $data['name'],
+            'questions' => $data['questions'],
+        ];
+        $result = $this->getBase()->insertOne($data);
+        if (!$result->isAcknowledged()) {
+            throw new \UnexpectedValueException(__('Could not save quiz'));
+        }
+
+        $data['_id'] = (string)$result->getInsertedId();
+
+        return json_decode(json_encode($data));
+    }
+    /**
      * @return \MongoDB\Driver\Cursor
      */
     public function getAll()

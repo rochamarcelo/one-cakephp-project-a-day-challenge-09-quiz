@@ -28,4 +28,24 @@ class QuizzesController extends AppController
             $this->viewBuilder()->setTemplate('result');
         }
     }
+
+    /**
+     * Add method
+     *
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
+     */
+    public function add(QuizzesCollection $collection)
+    {
+        if ($this->request->is('post')) {
+            $collection->createOne($this->request->getData());
+            $this->Flash->success(__('Quiz created'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+        $qtyQuestions = (int)$this->request->getQuery('quantity');
+        if ($qtyQuestions < 1) {
+            $this->viewBuilder()->setTemplate('chooseQuantity');
+        }
+        $this->set(compact('qtyQuestions'));
+    }
 }
