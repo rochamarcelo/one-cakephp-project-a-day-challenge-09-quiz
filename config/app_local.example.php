@@ -91,4 +91,10 @@ return [
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
     ],
+    'MongoDB' => [
+        'default' => [
+            'url' => 'mongodb://127.0.0.1/',
+            'database' => 'my_app',
+        ]
+    ],
 ];
